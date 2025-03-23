@@ -1,0 +1,123 @@
+# Dataset and preprocessing configuration
+
+dataset:
+  name: "coco"  # Options: coco, open_images, voc
+  subset: "2017"  # Specific subset of the dataset
+
+  # Class configuration
+  classes:
+    - person
+    - bicycle
+    - car
+    - motorcycle
+    - airplane
+    - bus
+    - train
+    - truck
+    - boat
+    - traffic light
+    - fire hydrant
+    - stop sign
+    - parking meter
+    - bench
+    - bird
+    - cat
+    - dog
+    - horse
+    - sheep
+    - cow
+
+  # Train-validation-test split
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+  # Paths
+  train_path: "./data/processed/train"
+  val_path: "./data/processed/val"
+  test_path: "./data/processed/test"
+  label_format: "coco"  # Options: coco, yolo, voc
+
+# Preprocessing
+preprocessing:
+  resize:
+    height: 416
+    width: 416
+    method: "letterbox"  # Options: letterbox, stretch
+
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+  # Advanced preprocessing
+  mosaic: true  # Mosaic augmentation
+  mixup: false  # Mixup augmentation
+  cutout: false  # Cutout augmentation
+
+# Augmentation
+augmentation:
+  enabled: true
+
+  # Geometric transformations
+  horizontal_flip:
+    enabled: true
+    probability: 0.5
+
+  vertical_flip:
+    enabled: false
+    probability: 0.5
+
+  rotate:
+    enabled: true
+    max_angle: 10
+    probability: 0.3
+
+  scale:
+    enabled: true
+    range: [0.8, 1.2]
+    probability: 0.5
+
+  translate:
+    enabled: true
+    percent: 0.1
+    probability: 0.3
+
+  # Color transformations
+  brightness:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  contrast:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  saturation:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  hue:
+    enabled: true
+    factor: 0.05
+    probability: 0.3
+
+  blur:
+    enabled: false
+    kernel_size: 3
+    probability: 0.1
+
+  noise:
+    enabled: true
+    type: "gaussian"  # Options: gaussian, salt, pepper, speckle
+    probability: 0.2
+
+# DataLoader settings
+dataloader:
+  batch_size: 16
+  shuffle: true
+  num_workers: 4
+  pin_memory: true
+  drop_last: true
+  collate_fn: "yolo_collate_fn"

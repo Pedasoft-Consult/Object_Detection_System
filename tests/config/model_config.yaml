@@ -1,0 +1,13 @@
+model:
+  input_size: 416
+  name: yolov5
+  nms:
+    iou_threshold: 0.45
+    max_detections: 300
+    score_threshold: 0.25
+  num_classes: 20
+  version: s
+optimization:
+  export:
+    format: onnx
+    opset_version: 12

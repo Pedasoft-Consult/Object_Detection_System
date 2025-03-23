@@ -1,0 +1,28 @@
+
+
+STDERR:
+2025-03-23 13:44:01,526 - __main__ - INFO - Stress test results (5 requests):
+2025-03-23 13:44:01,526 - __main__ - INFO - Average time: 0.004 seconds
+2025-03-23 13:44:01,526 - __main__ - INFO - Maximum time: 0.004 seconds
+2025-03-23 13:44:01,526 - __main__ - INFO - Minimum time: 0.003 seconds
+2025-03-23 13:44:01,526 - __main__ - INFO - Stress test passed
+.2025-03-23 13:44:01,560 - __main__ - INFO - Batch API response time: 0.007 seconds
+2025-03-23 13:44:01,560 - __main__ - INFO - Batch predict found 3 objects across 3 images
+2025-03-23 13:44:01,560 - __main__ - INFO - Batch predict endpoint test passed
+.2025-03-23 13:44:01,573 - __main__ - INFO - Error handling test passed
+.2025-03-23 13:44:01,579 - __main__ - INFO - Health endpoint test passed
+.2025-03-23 13:44:01,690 - __main__ - INFO - Image with detections saved to test_output/test_threshold_0.1.jpg
+2025-03-23 13:44:01,703 - __main__ - INFO - Image with detections saved to test_output/test_threshold_0.3.jpg
+2025-03-23 13:44:01,716 - __main__ - INFO - Image with detections saved to test_output/test_threshold_0.5.jpg
+2025-03-23 13:44:01,729 - __main__ - INFO - Image with detections saved to test_output/test_threshold_0.7.jpg
+2025-03-23 13:44:01,741 - __main__ - INFO - Image with detections saved to test_output/test_threshold_0.9.jpg
+2025-03-23 13:44:01,741 - __main__ - INFO - Threshold test passed
+.2025-03-23 13:44:01,757 - __main__ - INFO - API response time: 0.004 seconds
+2025-03-23 13:44:01,764 - __main__ - INFO - Image with detections saved to test_output/test_detected.jpg
+2025-03-23 13:44:01,764 - __main__ - INFO - Found 1 objects
+2025-03-23 13:44:01,764 - __main__ - INFO - Predict endpoint test passed
+.
+----------------------------------------------------------------------
+Ran 6 tests in 0.308s
+
+OK

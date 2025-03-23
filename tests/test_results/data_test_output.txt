@@ -1,0 +1,30 @@
+
+
+STDERR:
+2025-03-23 13:44:04,097 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:04,102 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:04,109 - __main__ - INFO - Annotation loading test passed
+.2025-03-23 13:44:04,184 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:04,190 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:04,250 - __main__ - INFO - Batch creation test passed
+.2025-03-23 13:44:04,331 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:04,336 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:04,348 - __main__ - INFO - Data augmentation test passed
+.2025-03-23 13:44:04,502 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:04,508 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:04,510 - __main__ - INFO - Data splits test passed
+.2025-03-23 13:44:04,986 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:04,992 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:04,998 - __main__ - INFO - Image loading test passed
+/usr/lib/python3.12/unittest/case.py:589: ResourceWarning:
+
+unclosed file <_io.BufferedReader name='test_data/images/image_0000.jpg'>
+
+.2025-03-23 13:44:05,181 - __main__ - INFO - Generated test dataset with 5 images
+2025-03-23 13:44:05,186 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:05,245 - __main__ - INFO - Image preprocessing test passed
+.
+----------------------------------------------------------------------
+Ran 6 tests in 1.243s
+
+OK

@@ -1,0 +1,29 @@
+# Global settings
+global:
+  scrape_interval: 15s     # How frequently to scrape targets by default
+  evaluation_interval: 15s # How frequently to evaluate rules
+  scrape_timeout: 10s      # How long until a scrape request times out
+
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  # Object Detection API metrics
+  - job_name: 'object_detection_api'
+    metrics_path: '/metrics'  # Endpoint where metrics are exposed
+    scrape_interval: 5s       # More frequent scraping for the API
+    static_configs:
+      - targets: ['your-api-host:8000']  # Update with your API's host:port
+
+  # Node exporter metrics (system metrics)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Container metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

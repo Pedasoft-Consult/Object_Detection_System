@@ -1,0 +1,243 @@
+# config/config.yaml
+# Main configuration file for the object detection system
+
+project_name: "custom-object-detection"
+random_seed: 42
+device: "cuda"  # or "cpu"
+num_workers: 4
+
+# Paths
+data_dir: "./data"
+logs_dir: "./logs"
+models_dir: "./models"
+output_dir: "./output"
+
+# Training settings
+training:
+  batch_size: 16
+  num_epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0005
+  optimizer: "adam"  # Options: adam, sgd
+  lr_scheduler: "cosine"  # Options: step, cosine, plateau
+  early_stopping_patience: 5
+  gradient_clip_val: 1.0
+  mixed_precision: true
+
+# Evaluation settings
+evaluation:
+  batch_size: 8
+  iou_threshold: 0.5
+  confidence_threshold: 0.25
+  max_detections: 100
+
+# Logging and checkpoints
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  save_checkpoint_freq: 5  # Save checkpoint every N epochs
+  log_interval: 50  # Log every N batches
+  to_file: true
+  file_path: "logs/app.log"
+  tensorboard: true
+  wandb:
+    use: false
+    project: "object-detection"
+    entity: "Pedahel"
+
+# Deployment
+api:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  max_request_size: 10  # Max request size in MB
+  timeout: 30  # Request timeout in seconds
+  cors_origins: ["*"]  # CORS allowed origins
+  allowed_extensions: [".jpg", ".jpeg", ".png"]
+
+# Cloud settings
+cloud:
+  provider: "aws"  # Options: aws, gcp, azure
+  region: "us-west-2"
+  bucket_name: "object-detection-models"
+  instance_type: "t2.large"
+
+# config/data_config.yaml
+# Dataset and preprocessing configuration
+
+dataset:
+  name: "coco"  # Options: coco, open_images, voc
+  subset: "2017"  # Specific subset of the dataset
+
+  # Class configuration
+  classes:
+    - person
+    - bicycle
+    - car
+    - motorcycle
+    - airplane
+    - bus
+    - train
+    - truck
+    - boat
+    - traffic light
+    - fire hydrant
+    - stop sign
+    - parking meter
+    - bench
+    - bird
+    - cat
+    - dog
+    - horse
+    - sheep
+    - cow
+
+  # Train-validation-test split
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+  # Paths
+  train_path: "./data/processed/train"
+  val_path: "./data/processed/val"
+  test_path: "./data/processed/test"
+  label_format: "coco"  # Options: coco, yolo, voc
+
+# Preprocessing
+preprocessing:
+  resize:
+    height: 416
+    width: 416
+    method: "letterbox"  # Options: letterbox, stretch
+
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+  # Advanced preprocessing
+  mosaic: true  # Mosaic augmentation
+  mixup: false  # Mixup augmentation
+  cutout: false  # Cutout augmentation
+
+# Augmentation
+augmentation:
+  enabled: true
+
+  # Geometric transformations
+  horizontal_flip:
+    enabled: true
+    probability: 0.5
+
+  vertical_flip:
+    enabled: false
+    probability: 0.5
+
+  rotate:
+    enabled: true
+    max_angle: 10
+    probability: 0.3
+
+  scale:
+    enabled: true
+    range: [0.8, 1.2]
+    probability: 0.5
+
+  translate:
+    enabled: true
+    percent: 0.1
+    probability: 0.3
+
+  # Color transformations
+  brightness:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  contrast:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  saturation:
+    enabled: true
+    factor: 0.2
+    probability: 0.5
+
+  hue:
+    enabled: true
+    factor: 0.05
+    probability: 0.3
+
+  blur:
+    enabled: false
+    kernel_size: 3
+    probability: 0.1
+
+  noise:
+    enabled: true
+    type: "gaussian"  # Options: gaussian, salt, pepper, speckle
+    probability: 0.2
+
+# DataLoader settings
+dataloader:
+  batch_size: 16
+  shuffle: true
+  num_workers: 4
+  pin_memory: true
+  drop_last: true
+  collate_fn: "yolo_collate_fn"
+
+# config/model_config.yaml
+# YOLO model configuration
+
+model:
+  name: "yolov5"
+  version: "s"  # Options: n, s, m, l, x (from smallest to largest)
+  pretrained: true
+  pretrained_weights: "yolov5s.pt"
+
+  # Input settings
+  input_size: 416  # Input image size (height and width)
+  channels: 3  # Number of input channels
+
+  # Architecture settings
+  backbone: "CSPDarknet"
+  neck: "PANet"
+  head: "YOLOHead"
+
+  # Detection settings
+  num_classes: 20  # Number of classes to detect
+  anchors: [10,13, 16,30, 33,23, 30,61, 62,45, 59,119, 116,90, 156,198, 373,326]
+  anchor_masks: [[0,1,2], [3,4,5], [6,7,8]]
+  strides: [8, 16, 32]  # Strides for each detection layer
+
+  # Loss settings
+  loss:
+    box_weight: 0.05
+    obj_weight: 1.0
+    cls_weight: 0.5
+    iou_type: "ciou"  # Options: iou, giou, diou, ciou
+
+  # NMS settings
+  nms:
+    iou_threshold: 0.45
+    score_threshold: 0.25
+    max_detections: 300
+
+# Optimization settings
+optimization:
+  quantization:
+    enabled: true
+    method: "dynamic"  # Options: dynamic, static
+    precision: "int8"  # Options: int8, fp16
+
+  pruning:
+    enabled: false
+    method: "magnitude"  # Options: magnitude, l1_unstructured
+    amount: 0.3  # Percentage of weights to prune
+
+  export:
+    format: "onnx"  # Options: onnx, tensorrt, tflite
+    optimize: true
+    simplify: true
+    opset_version: 12

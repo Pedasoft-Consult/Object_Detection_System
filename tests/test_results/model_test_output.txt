@@ -1,0 +1,75 @@
+
+
+STDERR:
+2025-03-23 13:44:12,332 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:12,337 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:12,342 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:12,348 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:12,479 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:12,572 - __main__ - INFO - Batch inference time for 4 images: 55.63 ms
+2025-03-23 13:44:12,572 - __main__ - INFO - Average time per image: 13.91 ms
+2025-03-23 13:44:12,572 - __main__ - INFO - Batch inference test passed
+.2025-03-23 13:44:12,587 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:12,592 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:12,597 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:12,603 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:12,658 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:12,675 - __main__ - INFO - Threshold 0.1: 0 detections
+2025-03-23 13:44:12,675 - __main__ - INFO - Threshold 0.25: 0 detections
+2025-03-23 13:44:12,675 - __main__ - INFO - Threshold 0.5: 0 detections
+2025-03-23 13:44:12,675 - __main__ - INFO - Threshold 0.75: 0 detections
+2025-03-23 13:44:12,675 - __main__ - INFO - Threshold 0.9: 0 detections
+2025-03-23 13:44:12,675 - __main__ - INFO - Confidence threshold test passed
+.2025-03-23 13:44:12,688 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:12,693 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:12,698 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:12,705 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:12,757 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:12,860 - __main__ - INFO - Performance over 10 runs:
+2025-03-23 13:44:12,860 - __main__ - INFO - Average inference time: 10.04 ms
+2025-03-23 13:44:12,860 - __main__ - INFO - Min inference time: 7.79 ms
+2025-03-23 13:44:12,860 - __main__ - INFO - Max inference time: 11.25 ms
+2025-03-23 13:44:12,860 - __main__ - INFO - Frames per second: 99.56
+2025-03-23 13:44:12,860 - __main__ - INFO - Inference performance test passed
+.2025-03-23 13:44:12,873 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:12,879 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:12,883 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:12,890 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:12,945 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:12,954 - __main__ - INFO - IoU threshold 0.1: 0 detections
+2025-03-23 13:44:12,955 - __main__ - INFO - IoU threshold 0.3: 0 detections
+2025-03-23 13:44:12,955 - __main__ - INFO - IoU threshold 0.5: 0 detections
+2025-03-23 13:44:12,955 - __main__ - INFO - IoU threshold 0.7: 0 detections
+2025-03-23 13:44:12,955 - __main__ - INFO - IoU threshold 0.9: 0 detections
+2025-03-23 13:44:12,955 - __main__ - INFO - IoU threshold test passed
+.2025-03-23 13:44:12,966 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:12,971 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:12,975 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:12,980 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:13,032 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:13,056 - __main__ - INFO - Inference time: 11.14 ms
+2025-03-23 13:44:13,057 - __main__ - INFO - Detected 0 objects
+2025-03-23 13:44:13,064 - __main__ - INFO - Model inference test passed
+.2025-03-23 13:44:13,075 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:13,080 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:13,083 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:13,087 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:13,141 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:13,141 - __main__ - INFO - Testing input size: 208x208
+2025-03-23 13:44:13,150 - __main__ - INFO - Detected 0 objects in 208x208 image
+2025-03-23 13:44:13,150 - __main__ - INFO - Testing input size: 416x416
+2025-03-23 13:44:13,165 - __main__ - INFO - Detected 0 objects in 416x416 image
+2025-03-23 13:44:13,165 - __main__ - INFO - Testing input size: 832x832
+2025-03-23 13:44:13,176 - __main__ - INFO - Detected 0 objects in 832x832 image
+2025-03-23 13:44:13,177 - __main__ - INFO - Input robustness test passed
+.2025-03-23 13:44:13,188 - __main__ - INFO - Loaded main configuration
+2025-03-23 13:44:13,193 - __main__ - INFO - Loaded data configuration
+2025-03-23 13:44:13,197 - __main__ - INFO - Loaded model configuration
+2025-03-23 13:44:13,201 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:13,256 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:13,256 - __main__ - INFO - Model loading test passed
+.
+----------------------------------------------------------------------
+Ran 7 tests in 0.934s
+
+OK

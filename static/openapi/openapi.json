@@ -1,0 +1,562 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Object Detection API",
+    "description": "API for real-time object detection using YOLO models",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "email": "support@yourdomain.com",
+      "url": "https://yourdomain.com/support"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.yourdomain.com",
+      "description": "Production server"
+    },
+    {
+      "url": "https://staging-api.yourdomain.com",
+      "description": "Staging server"
+    },
+    {
+      "url": "http://localhost:8000",
+      "description": "Local development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "detection",
+      "description": "Object detection endpoints"
+    },
+    {
+      "name": "health",
+      "description": "API health and status endpoints"
+    },
+    {
+      "name": "monitoring",
+      "description": "API monitoring and metrics endpoints"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root endpoint",
+        "description": "Returns information about the API",
+        "operationId": "getRootInfo",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "Returns the health status of the API",
+        "operationId": "getHealthCheck",
+        "tags": [
+          "health"
+        ],
+        "responses": {
+          "200": {
+            "description": "API is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                },
+                "example": {
+                  "status": "healthy",
+                  "model_loaded": true,
+                  "model_type": "real",
+                  "configuration": {
+                    "confidence_threshold": 0.25,
+                    "iou_threshold": 0.45
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "API is unhealthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": "error",
+                  "message": "Model not initialized: Model file not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Prometheus metrics",
+        "description": "Returns Prometheus metrics for the API",
+        "operationId": "getMetrics",
+        "tags": [
+          "monitoring"
+        ],
+        "responses": {
+          "200": {
+            "description": "Prometheus metrics",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "Detect objects in an image",
+        "description": "Detects objects in the uploaded image using the YOLO model",
+        "operationId": "predictObjects",
+        "tags": [
+          "detection"
+        ],
+        "parameters": [
+          {
+            "name": "conf_threshold",
+            "in": "query",
+            "description": "Confidence threshold for detections (0-1)",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.25
+            }
+          },
+          {
+            "name": "max_detections",
+            "in": "query",
+            "description": "Maximum number of detections to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 100
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Image file to detect objects in",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Image file (JPEG, PNG, etc.)"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful object detection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "Invalid image format"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request entity too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "File too large. Maximum size is 10 MB"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "Error processing request: Model initialization failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/batch_predict": {
+      "post": {
+        "summary": "Detect objects in multiple images",
+        "description": "Detects objects in multiple uploaded images using the YOLO model",
+        "operationId": "batchPredictObjects",
+        "tags": [
+          "detection"
+        ],
+        "parameters": [
+          {
+            "name": "conf_threshold",
+            "in": "query",
+            "description": "Confidence threshold for detections (0-1)",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.25
+            }
+          },
+          {
+            "name": "max_detections",
+            "in": "query",
+            "description": "Maximum number of detections to return per image",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 100
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Multiple image files to detect objects in",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "description": "Image files (JPEG, PNG, etc.)"
+                  }
+                },
+                "required": [
+                  "files"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful batch object detection",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchPredictionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "Invalid request format"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Request entity too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "Files too large. Maximum size is 10 MB per file"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "detail": "Error processing batch request: Model initialization failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Health status of the API",
+            "enum": [
+              "healthy",
+              "error"
+            ]
+          },
+          "model_loaded": {
+            "type": "boolean",
+            "description": "Whether the model is loaded"
+          },
+          "model_type": {
+            "type": "string",
+            "description": "Type of model loaded",
+            "enum": [
+              "real",
+              "mock"
+            ]
+          },
+          "configuration": {
+            "type": "object",
+            "properties": {
+              "confidence_threshold": {
+                "type": "number",
+                "format": "float",
+                "description": "Current confidence threshold"
+              },
+              "iou_threshold": {
+                "type": "number",
+                "format": "float",
+                "description": "Current IoU threshold"
+              }
+            }
+          }
+        },
+        "required": [
+          "status",
+          "model_loaded"
+        ]
+      },
+      "Detection": {
+        "type": "object",
+        "properties": {
+          "bbox": {
+            "type": "array",
+            "description": "Bounding box coordinates [x1, y1, x2, y2]",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Detection confidence score (0-1)"
+          },
+          "class_id": {
+            "type": "integer",
+            "description": "Class ID of the detected object"
+          },
+          "class_name": {
+            "type": "string",
+            "description": "Class name of the detected object"
+          }
+        },
+        "required": [
+          "bbox",
+          "confidence",
+          "class_id",
+          "class_name"
+        ]
+      },
+      "PredictionResponse": {
+        "type": "object",
+        "properties": {
+          "detections": {
+            "type": "array",
+            "description": "List of detected objects",
+            "items": {
+              "$ref": "#/components/schemas/Detection"
+            }
+          },
+          "inference_time": {
+            "type": "number",
+            "format": "float",
+            "description": "Inference time in seconds"
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Name of the model used for detection"
+          },
+          "image_size": {
+            "type": "array",
+            "description": "Size of the input image [width, height]",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "detections",
+          "inference_time",
+          "model_name",
+          "image_size"
+        ]
+      },
+      "BatchImageResult": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "description": "Name of the image file"
+          },
+          "status": {
+            "type": "string",
+            "description": "Processing status",
+            "enum": [
+              "success",
+              "error"
+            ]
+          },
+          "detections": {
+            "type": "array",
+            "description": "List of detected objects (present if status is 'success')",
+            "items": {
+              "$ref": "#/components/schemas/Detection"
+            }
+          },
+          "inference_time": {
+            "type": "number",
+            "format": "float",
+            "description": "Inference time in seconds (present if status is 'success')"
+          },
+          "model_name": {
+            "type": "string",
+            "description": "Name of the model used for detection (present if status is 'success')"
+          },
+          "image_size": {
+            "type": "array",
+            "description": "Size of the input image [width, height] (present if status is 'success')",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message (present if status is 'error')"
+          }
+        },
+        "required": [
+          "filename",
+          "status"
+        ]
+      },
+      "BatchPredictionResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "description": "Results for each image in the batch",
+            "items": {
+              "$ref": "#/components/schemas/BatchImageResult"
+            }
+          }
+        },
+        "required": [
+          "results"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "Error message"
+          }
+        },
+        "required": [
+          "detail"
+        ]
+      }
+    }
+  }
+}

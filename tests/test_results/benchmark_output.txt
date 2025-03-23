@@ -1,0 +1,71 @@
+
+
+STDERR:
+2025-03-23 13:44:16,460 - __main__ - INFO - Running benchmark on model: models/final/model.onnx
+2025-03-23 13:44:16,460 - __main__ - INFO - Number of runs: 20
+2025-03-23 13:44:16,460 - __main__ - INFO - Warmup runs: 5
+2025-03-23 13:44:16,464 - __main__ - INFO - Using providers: ['CPUExecutionProvider']
+2025-03-23 13:44:16,526 - __main__ - INFO - Model loaded successfully. Input shape: ['batch_size', 3, 416, 416]
+2025-03-23 13:44:16,526 - __main__ - INFO - Testing input size: 416x416
+2025-03-23 13:44:16,538 - __main__ - INFO - Saved test image to test_results/benchmark/test_image_416x416.jpg
+2025-03-23 13:44:16,540 - __main__ - INFO - Performing 5 warmup runs...
+2025-03-23 13:44:16,597 - __main__ - INFO - Performing 20 benchmark runs...
+2025-03-23 13:44:16,607 - __main__ - INFO - Run 1/20: 10.59 ms
+2025-03-23 13:44:16,618 - __main__ - INFO - Run 2/20: 10.34 ms
+2025-03-23 13:44:16,628 - __main__ - INFO - Run 3/20: 10.27 ms
+2025-03-23 13:44:16,639 - __main__ - INFO - Run 4/20: 10.59 ms
+2025-03-23 13:44:16,650 - __main__ - INFO - Run 5/20: 10.32 ms
+2025-03-23 13:44:16,660 - __main__ - INFO - Run 6/20: 10.76 ms
+2025-03-23 13:44:16,671 - __main__ - INFO - Run 7/20: 10.45 ms
+2025-03-23 13:44:16,682 - __main__ - INFO - Run 8/20: 10.66 ms
+2025-03-23 13:44:16,693 - __main__ - INFO - Run 9/20: 10.72 ms
+2025-03-23 13:44:16,703 - __main__ - INFO - Run 10/20: 10.28 ms
+2025-03-23 13:44:16,713 - __main__ - INFO - Run 11/20: 10.11 ms
+2025-03-23 13:44:16,724 - __main__ - INFO - Run 12/20: 10.03 ms
+2025-03-23 13:44:16,734 - __main__ - INFO - Run 13/20: 9.94 ms
+2025-03-23 13:44:16,744 - __main__ - INFO - Run 14/20: 9.89 ms
+2025-03-23 13:44:16,754 - __main__ - INFO - Run 15/20: 9.85 ms
+2025-03-23 13:44:16,764 - __main__ - INFO - Run 16/20: 10.24 ms
+2025-03-23 13:44:16,775 - __main__ - INFO - Run 17/20: 10.23 ms
+2025-03-23 13:44:16,783 - __main__ - INFO - Run 18/20: 8.06 ms
+2025-03-23 13:44:16,790 - __main__ - INFO - Run 19/20: 7.14 ms
+2025-03-23 13:44:16,797 - __main__ - INFO - Run 20/20: 6.83 ms
+2025-03-23 13:44:16,804 - __main__ - INFO - Results for 416x416:
+2025-03-23 13:44:16,805 - __main__ - INFO - Mean inference time: 9.86 ms
+2025-03-23 13:44:16,805 - __main__ - INFO - Standard deviation: 1.11 ms
+2025-03-23 13:44:16,805 - __main__ - INFO - Min inference time: 6.83 ms
+2025-03-23 13:44:16,805 - __main__ - INFO - Max inference time: 10.76 ms
+2025-03-23 13:44:16,805 - __main__ - INFO - Throughput: 101.37 FPS
+2025-03-23 13:44:16,805 - __main__ - INFO - Testing input size: 640x640
+2025-03-23 13:44:16,812 - __main__ - INFO - Saved test image to test_results/benchmark/test_image_640x640.jpg
+2025-03-23 13:44:16,818 - __main__ - INFO - Performing 5 warmup runs...
+2025-03-23 13:44:16,860 - __main__ - INFO - Performing 20 benchmark runs...
+2025-03-23 13:44:16,871 - __main__ - INFO - Run 1/20: 11.23 ms
+2025-03-23 13:44:16,882 - __main__ - INFO - Run 2/20: 10.71 ms
+2025-03-23 13:44:16,889 - __main__ - INFO - Run 3/20: 7.36 ms
+2025-03-23 13:44:16,898 - __main__ - INFO - Run 4/20: 8.42 ms
+2025-03-23 13:44:16,905 - __main__ - INFO - Run 5/20: 7.23 ms
+2025-03-23 13:44:16,918 - __main__ - INFO - Run 6/20: 12.51 ms
+2025-03-23 13:44:16,931 - __main__ - INFO - Run 7/20: 12.85 ms
+2025-03-23 13:44:16,943 - __main__ - INFO - Run 8/20: 12.14 ms
+2025-03-23 13:44:16,952 - __main__ - INFO - Run 9/20: 8.77 ms
+2025-03-23 13:44:16,964 - __main__ - INFO - Run 10/20: 11.42 ms
+2025-03-23 13:44:16,975 - __main__ - INFO - Run 11/20: 10.70 ms
+2025-03-23 13:44:16,985 - __main__ - INFO - Run 12/20: 10.26 ms
+2025-03-23 13:44:16,994 - __main__ - INFO - Run 13/20: 8.34 ms
+2025-03-23 13:44:17,002 - __main__ - INFO - Run 14/20: 7.75 ms
+2025-03-23 13:44:17,012 - __main__ - INFO - Run 15/20: 10.53 ms
+2025-03-23 13:44:17,021 - __main__ - INFO - Run 16/20: 8.58 ms
+2025-03-23 13:44:17,028 - __main__ - INFO - Run 17/20: 6.77 ms
+2025-03-23 13:44:17,037 - __main__ - INFO - Run 18/20: 8.72 ms
+2025-03-23 13:44:17,045 - __main__ - INFO - Run 19/20: 8.26 ms
+2025-03-23 13:44:17,057 - __main__ - INFO - Run 20/20: 11.25 ms
+2025-03-23 13:44:17,058 - __main__ - INFO - Results for 640x640:
+2025-03-23 13:44:17,058 - __main__ - INFO - Mean inference time: 9.69 ms
+2025-03-23 13:44:17,058 - __main__ - INFO - Standard deviation: 1.83 ms
+2025-03-23 13:44:17,058 - __main__ - INFO - Min inference time: 6.77 ms
+2025-03-23 13:44:17,058 - __main__ - INFO - Max inference time: 12.85 ms
+2025-03-23 13:44:17,058 - __main__ - INFO - Throughput: 103.21 FPS
+2025-03-23 13:44:17,064 - __main__ - INFO - Results saved to test_results/benchmark/benchmark_results.json
+2025-03-23 13:44:17,068 - __main__ - INFO - CSV results saved to test_results/benchmark/benchmark_results.csv
+2025-03-23 13:44:17,303 - __main__ - INFO - Charts generated

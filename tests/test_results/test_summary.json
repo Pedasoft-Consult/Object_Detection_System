@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-03-23 13:44:17",
+  "total_tests": 4,
+  "passed_tests": 4,
+  "total_time": 18.48386836051941,
+  "results": [
+    {
+      "name": "API Tests",
+      "success": true,
+      "duration": 3.1903481483459473,
+      "returncode": 0,
+      "output_file": "api_test_output.txt"
+    },
+    {
+      "name": "Data Tests",
+      "success": true,
+      "duration": 3.219996452331543,
+      "returncode": 0,
+      "output_file": "data_test_output.txt"
+    },
+    {
+      "name": "Model Tests",
+      "success": true,
+      "duration": 8.728894233703613,
+      "returncode": 0,
+      "output_file": "model_test_output.txt"
+    },
+    {
+      "name": "Model Benchmark",
+      "success": true,
+      "duration": 3.3446295261383057,
+      "returncode": 0,
+      "output_file": "benchmark_output.txt",
+      "benchmark_dir": "test_results/benchmark"
+    }
+  ]
+}

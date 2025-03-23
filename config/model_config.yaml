@@ -1,0 +1,53 @@
+# YOLO model configuration
+
+model:
+  name: "yolov5"
+  version: "s"  # Options: n, s, m, l, x (from smallest to largest)
+  pretrained: true
+  pretrained_weights: "yolov5s.pt"
+
+  # Input settings
+  input_size: 416  # Input image size (height and width)
+  channels: 3  # Number of input channels
+
+  # Architecture settings
+  backbone: "CSPDarknet"
+  neck: "PANet"
+  head: "YOLOHead"
+
+  # Detection settings
+  num_classes: 20  # Number of classes to detect
+  anchors: [10,13, 16,30, 33,23, 30,61, 62,45, 59,119, 116,90, 156,198, 373,326]
+  anchor_masks: [[0,1,2], [3,4,5], [6,7,8]]
+  strides: [8, 16, 32]  # Strides for each detection layer
+
+  # Loss settings
+  loss:
+    box_weight: 0.05
+    obj_weight: 1.0
+    cls_weight: 0.5
+    iou_type: "ciou"  # Options: iou, giou, diou, ciou
+
+  # NMS settings
+  nms:
+    iou_threshold: 0.45
+    score_threshold: 0.25
+    max_detections: 300
+
+# Optimization settings
+optimization:
+  quantization:
+    enabled: true
+    method: "dynamic"  # Options: dynamic, static
+    precision: "int8"  # Options: int8, fp16
+
+  pruning:
+    enabled: false
+    method: "magnitude"  # Options: magnitude, l1_unstructured
+    amount: 0.3  # Percentage of weights to prune
+
+  export:
+    format: "onnx"  # Options: onnx, tensorrt, tflite
+    optimize: true
+    simplify: true
+    opset_version: 12

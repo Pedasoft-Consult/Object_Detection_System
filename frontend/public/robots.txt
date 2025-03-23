@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/admin/
+Disallow: /metrics
+Disallow: /api/internal/
+Disallow: /api/v1/private/
+
+# Prevent access to model files
+Disallow: /models/
+Disallow: /logs/
+Disallow: /config/
+
+# API documentation is allowed
+Allow: /docs
+Allow: /redoc
+
+#Sitemap: https://yourdomain.com/sitemap.xml
